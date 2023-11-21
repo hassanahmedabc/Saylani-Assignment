@@ -1,138 +1,64 @@
 // Question No 1
- let userFirstName = prompt("Enter your first name");
- let userLastName = prompt("Enter your last name");
- const fullName = userFirstName + " " + userLastName;
- alert(`Wel come to our land, ${fullName}`);
 
-//Question No 2
-let favMobilePhone = prompt("Enter your favourite mobile phone model");
-const findLength = favMobilePhone.length;
-document.write(`My favourite phone is: ${favMobilePhone} <br> Length of string is: ${favMobilePhone.length}`);
+let positiveInteger = 3.45214;
+let conIntoRound = Math.round(positiveInteger);
+let conIntoRound2 = Math.floor(positiveInteger);
+let conIntoRound3 = Math.ceil(positiveInteger);
+document.write(
+  `Number: ${positiveInteger} <br>round off value: ${conIntoRound} <br>floor value: ${conIntoRound2} <br>Ceil value: ${conIntoRound3}`
+);
 
-//Question No 3
-let text = "Pakistani";
-let findIndexOfText = text.indexOf("n");
-document.write(`String: ${text} <br> Index of 'n': ${findIndexOfText}`);
+// Question No 2
+let negativePoint = -2.673;
+let negIntoRound = Math.round(negativePoint);
+let negIntofloor = Math.floor(negativePoint);
+let negIntoCeil = Math.ceil(negativePoint);
+document.write(
+  `<br><br>Number: ${negativePoint} <br>round off value: ${negIntoRound} <br>floor value: ${negIntofloor} <br>Ceil value: ${negIntoCeil}`
+);
 
-//  Question No 4
-let text_2 = "Hello World";
-let lastIndex = text_2.lastIndexOf("l");
-document.write(`<br><br>String: ${text_2} <br> Last index of 'I': ${lastIndex}`);
+// Question No 3
+let absNumber = -4;
+let absNumber2 = Math.abs(absNumber);
+document.write(`<br><br>The absolute value of ${absNumber} is ${absNumber2}`);
+
+// Question No 4
+let randomDice = Math.round(Math.random() * 10);
+console.log(`random dice value: ${randomDice}`);
 
 // Question No 5
-let text_3 = "Pakistani";
-let index3Cha = text_3[3];
-document.write(`<br><br>String: ${text_3} <br> Character at index 3 is: ${index3Cha}`);
-
-// Question No 6 
-let userFirstName_2 = prompt("Enter your first name");
-let userLastName_2 = prompt("Enter your last name");
-let bothInConcate = userFirstName_2.concat(" "+ userLastName_2);
-alert(`Wel come to our land, ${bothInConcate}`);
-
-// Question No 7
-const cityName = "Hyderabad";
-const replaceByAnother =cityName.replace("Hyder","Islam");
-document.write(`<br><br>City: ${cityName} <br>After replacement: ${replaceByAnother}`);
-// Another method to replace the value
-let name = "Hyderabad";
-let changeName = name.indexOf("Hyder");
-if (changeName != -1) {
-    name = name.slice(0,changeName) + "Islam" + name.slice(changeName + 5)
+let randomCoinValue = ["Tails", "Heads"];
+let emptyStr = "";
+var randomNum;
+for (var i = 0; i < randomCoinValue.length; i++) {
+  randomNum = Math.floor(Math.random() * randomCoinValue.length);
+  emptyStr = randomCoinValue[randomNum];
 }
-console.log(name);
+document.write(`<br><br>${randomNum} random coin value: ${emptyStr}`);
+
+// Question No 6
+
+let randomNumShow = Math.round(Math.random() * 100);
+console.log(`Random number between 1 and 100: ${randomNumShow}`);
+
+//Question No 7
+let askUserWeight = prompt("Enter your weight in kilograms");
+switch (askUserWeight) {
+  case "Kgs":
+    console.log(askUserWeight);
+    break;
+
+  default:
+    console.log();
+    break;
+}
 
 // Question No 8
-let longestString = "Ali and Sami are best friends.They play cricket and football together.";
-for (var i = 0; i < longestString.length; i++){
-    if (longestString.slice(i,i + 3) === "and") {
-        longestString = longestString.slice(0,i) + "&" + longestString.slice(i + 3);
-    }
+let secNum = Number(prompt("Enter a number between 1 and 10"));
+let numberGuess = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let randomNum = Math.floor(Math.random() * numberGuess.length) + 1;
+if (secNum === numberGuess[5]) {
+  alert(`Your secret number is ${secNum}`);
+} else {
+  alert("Try again!");
 }
-console.log(longestString);
-
-// Question No 9
-let stringNumber = "472";
-var stringToNumber = Number(stringNumber);
-console.log(stringToNumber);
-
-// Question No 10
-let userFavouriteDryFruit = prompt("What is your favourite dry fruit?");
-let storeDryFruit = userFavouriteDryFruit.toLocaleUpperCase();
-document.write(`<br><br>User input: ${userFavouriteDryFruit} <br>Upper Case: ${storeDryFruit}`);
-
-// Question No 11
-let userFavProgram = prompt("Enter your favourite programming language");
-let stringFirstCap = userFavProgram[0].toUpperCase();
-let stringRestInLowerCase = userFavProgram.slice(1).toLowerCase();
-document.write(`<br><br>User input: ${userFavProgram} <br>Title Case: ${stringFirstCap + stringRestInLowerCase}`);
-
-// Question No 12
-let number = 35.36;
-let converIntoStr = number.toString() * 100;
-document.write(`<br><br>Number: ${number}<br>Result: ${converIntoStr}`);
-
-// Question No 13
-var userName = prompt("Enter your name");
-var sign = /[^a-zA-Z0-9]/gi;
- if (sign.test(userName)) {
-    alert("Please enter a valid username")
- }else{
-    console.log(`username is ${userName}`);
- }
-
-// Question No 14
-let bakeriesItems = ["cake","apple pie","cookie","chips","patties"];
-let askingAboutItems = prompt("Welcome to Sitara Bakery.What do you want to order sir/ma'am");
-let checkingOut = "Available"
-let matchFound = false;
-for (var i = 0; i < bakeriesItems.length; i++) {
-    if (bakeriesItems[i] === askingAboutItems){
-        matchFound = true;
-        console.log(`${bakeriesItems[i]} is ${checkingOut} at index ${i}`);
-    }
-} 
- if(matchFound === false) {
-    console.log(`We are sorry.${askingAboutItems} is not available in our bakery`);
- }
-
- // Question No 15
- let password = prompt("Enter your password");
- let matchNum = false
- for (var i = 0; i < password.length; i++) {
-     if (isNaN(parseInt(password[i]))){
-         console.log(`Entered password: ${password}`);
-         matchNum = true
-         break
-
-     }else{
-         alert(`Password can not begin with a number`);
-         break
-     }
- }
-
-  if(isNaN(parseInt(password.length)) < 6){
-     alert("Please enter a valid number");
- }
-
-//  Question No 16 
- var university = ['University of Karachi'];
- var convIntoStri = university.toString(university);
- for (var i = 0; i < convIntoStri.length; i++) {
-     const element = convIntoStri[i];
-     console.log(element);
-}
-// Question No 17
-let lastCha = "Pakistan";
-let findLastCha = lastCha.charAt(7);
-console.log(`User input: ${lastCha} and last charac is: ${findLastCha}`);
-
-// Question No 18
-var str = "The quick brown fox jumps over the lazy dog";
- var findFirst = str.indexOf("the");
-console.log(findFirst);
- var findSome = "";
- for (var i = 0; i < 3; i++) {
-     var findValue = Math.floor(Math.random() * str.length);
-     findSome += str[findValue];
- }
