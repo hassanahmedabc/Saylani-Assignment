@@ -1,111 +1,78 @@
-// Question No 1
+const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
 
-const formVali = document.querySelector(".formVali");
-const fName = document.getElementById("fName");
-const lName = document.getElementById("lName");
-const password = document.getElementById("password");
-const cpassword = document.getElementById("cpassword");
-const signUp = document.querySelector(".signUp");
-function myHandle() {
-  if (
-    fName.value === "" ||
-    lName.value === "" ||
-    password.value === "" ||
-    cpassword.value === ""
-  ) {
-    alert("Please enter valid name & password");
-  } else if (password.value !== cpassword.value) {
-    alert("Password should be same");
-  } else {
-    formVali.style.display = "none";
-    signUp.innerHTML = `<div class="signUp" style="display: flex;">
-        <p>Hey dear ${fName.value}, you signed up successfully</p>
-    </div>
-        `;
-  }
-}
+if (!loggedInUser) window.location.href = '../login/index.html'
 
-// Question No 2
-const div = document.querySelector(".textArea");
-const p = document.createElement("p");
-p.innerText = `On the eve of the occasion, Absar Alam, former chief of the country’s electronic media regulator, made a damning statement before the Supreme Court alleging that a senior ISI officer, as well as his subordinates, attempted to control and coerce the media through Pemra during Mr Alam’s tenure.
-There are many in the industry who will attest to the fact that 
-the climate of repression that prevailed during retired Lt-Gen Faiz Hameed’s time at ISI’s helm was one of the worst experienced by Pakistani media. The former spy chief gained notoriety for pressuring Pakistani media in ways never 
-seen or heard before, including with direct threats.`;
-div.appendChild(p);
-document.body.appendChild(div);
-p.setAttribute("onclick", "showless()");
-const showMoreText = p.textContent.slice(0) + "...Showless";
-console.log(showMoreText);
-const readLess = p.textContent.slice(0, 26) + "...Readmore";
+const { userName, email, desc, pNumber, hobbies, profileUrl, id } = loggedInUser
 
-function showless() {
-  p.textContent = readLess;
-  p.setAttribute("onclick", "showMore()");
-}
-showless();
-function showMore() {
-  p.textContent = showMoreText;
-  p.setAttribute("onclick", "showless()");
+const userNameHtml = document.querySelector('#userName')
+const descHtml = document.querySelector('#desc')
+const emailHtml = document.querySelector('#email')
+const pNumberHtml = document.querySelector('#pNumber')
+const hobbiesHtml = document.querySelector('#hobbies')
+const profilePictureHtml = document.querySelector('#profilePicture2')
+
+const userNameInput = document.querySelector('#userNameInput')
+const emailInput = document.querySelector('#emailInput')
+const phoneNumberInput = document.querySelector('#phoneNumberInput')
+const hobbiesInput = document.querySelector('#hobbiesInput')
+const imageInput = document.querySelector('#imageInput')
+const descriptionInput = document.querySelector('#descriptionInput')
+
+
+userNameHtml.innerHTML = `${userName.slice(0, 1).toUpperCase()}${userName.slice(1).toLowerCase()}`
+
+descHtml.innerHTML = desc ? desc : "No Description Updated"
+emailHtml.innerHTML = email ? email : "No Email Updated"
+pNumberHtml.innerHTML = pNumber ? pNumber : "No Phone Number Updated"
+hobbiesHtml.innerHTML = hobbies ? hobbies : "No hobbies Updated"
+
+if(profileUrl) {
+    profilePictureHtml.src = profileUrl
 }
 
-// Question No 3
-const studentsMarks = [
-  " 10th",
-  "9th",
-  "9th",
-  "10th",
-  " 10th",
-  "9th",
-  "9th",
-  "10th",
-];
-const table = document.querySelector("table");
-const inputForm = document.querySelector(".form-control");
-let index = 0;
-function myHandler() {
-  const inputVal = inputForm.value;
-  if (inputVal == "") {
-    alert("Please enter a valid name");
-  } else {
-    table.innerHTML += `<tbody>
-    <tr >
-        <td>${index++}</td>
-        <td id=${inputVal}>${inputVal}</td>
-        <td>${studentsMarks[index - 1]}</td>
-        <td id="edit" onclick="myHandler2('${inputVal}')">Edit</td>
-        <td id="dlt" onclick="dltHandler('${inputVal}')">Delete</td>
-    </tr>
-</tbody>
-    `;
-  }
-  inputForm.value = "";
+userNameInput.value = userName ? userName : ''
+emailInput.value = email ? email : ''
+phoneNumberInput.value = pNumber ? pNumber : ''
+hobbiesInput.value = hobbies ? hobbies : ''
+imageInput.value = profileUrl ? profileUrl : ''
+descriptionInput.value = desc ? desc : ''
+
+
+const updateProfileHandler = () => {
+    const userObj = {
+        userName: userNameInput.value,
+        email: emailInput.value,
+        pNumber: phoneNumberInput.value,
+        hobbies: hobbiesInput.value.split(','),
+        profileUrl: imageInput.value,
+        desc: descriptionInput.value
+    }
+
+    console.log(userObj, "=====>>> userObj")
+
+    const users = JSON.parse(localStorage.getItem('users'))
+
+    let myUser = users.find((user) => {
+        return user.id === id
+    })
+
+    myUser.userName = userNameInput.value,
+    myUser.email = emailInput.value,
+    myUser.pNumber = phoneNumberInput.value,
+    myUser.hobbies = hobbiesInput.value.split(','),
+    myUser.profileUrl = imageInput.value,
+    myUser.desc = descriptionInput.value
+
+    console.log(users, "===>>> users")
+
+    console.log(myUser, "-===>> myUser")
+
+    localStorage.setItem('loggedInUser', JSON.stringify(userObj))
+    localStorage.setItem('users', JSON.stringify(users))
 }
-function myHandler2(inputVal) {
-  const check = document.getElementById(inputVal);
-  const submtBtn = document.getElementById("submtBtn");
-  submtBtn.innerText = "Edit";
-  inputForm.value = check.textContent;
-  submtBtn.setAttribute("onclick", `editHandler('${inputVal}')`);
-}
-function editHandler(inputVal) {
-  const check = document.getElementById(inputVal);
-  const submtBtn = document.getElementById("submtBtn");
-  check.textContent = inputForm.value;
-  submtBtn.textContent = "Search";
-  inputForm.value = "";
-  submtBtn.setAttribute("onclick", `myHandler()`);
-}
-function dltHandler(inputVal) {
-  const dlt = document.getElementById(inputVal);
-  dlt.parentElement.remove();
-}
-const btn = document.querySelector("button");
-const submtBtn = document.querySelector("#submtBtn");
-console.log(btn);
-function myHandler3(inputVal) {
-  const edit = document.getElementById("edit");
-  const name = document.getElementById(inputVal);
-  name.textContent = inputForm.value;
-  submtBtn.textContent = "Search";
+
+const logoutHandler = () => {
+    localStorage.removeItem('loggedInUser')
+
+    window.location.href = '../login/index.html'
 }
